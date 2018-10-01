@@ -1,0 +1,51 @@
+/*
+ * inicializaciones.h
+ *
+ *  Created on: 15 sep. 2018
+ *      Author: root
+ */
+
+#ifndef INICIALIZACIONES_H
+#define INICIALIZACIONES_H
+
+#include "chip.h"
+#include <stopwatch.h>
+#include <stdint.h>
+#include "hardware.h"
+
+#define TEC1_IRQ 1
+#define TEC2_IRQ 2
+#define TEC3_IRQ 3
+#define TEC4_IRQ 4
+
+
+typedef struct
+{
+uint8_t hwPort ;
+uint8_t hwPin ;
+uint8_t gpioPort ;
+uint8_t gpioPin ;
+uint16_t modo ;
+} digitalIO ;
+
+# define BUFFLEN 128
+RINGBUFF_T rbTx , rbRx ;
+uint8_t txBuff [ BUFFLEN ], rxBuff [ BUFFLEN ];
+
+
+void inicializar_sistema(void);
+void inicializar_leds(void);
+void inicializar_teclado(void);
+void init_interrupciones(void);
+
+void inicializar_USART(void);
+
+
+inline void configurar_SysTick(void)
+{
+	SysTick_Config ( SystemCoreClock / 100); /*cada 10 ms*/
+} __attribute__((always_inline))__;
+
+
+
+#endif /* INC_INICIALIZACIONES_H_ */
